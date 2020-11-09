@@ -33,4 +33,25 @@ public class MoveCude_PositiveZDirection : MonoBehaviour
          }
         
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            /* player
+            collision.gameObject
+            /
+            / moving cube
+            gameObject
+            */
+
+            collision.gameObject.transform.parent = gameObject.transform;
+            //transform.position = new Vector3(transform.position.x, transform.position.y, Player.transform.position.z);
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        collision.gameObject.transform.parent = null;
+    }
+
 }

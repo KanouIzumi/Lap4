@@ -9,7 +9,7 @@ public class Player_Controller : MonoBehaviour
     public GameObject MoveCube;//referencing the object
 
     float jumpForce = 8f;
-    bool onMoveCube;
+    bool OnAir;
 
     // Start is called before the first frame update
     void Start()
@@ -28,29 +28,30 @@ public class Player_Controller : MonoBehaviour
 
         PlayerJump();
 
-        if(onMoveCube == true)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, MoveCube.transform.position.z); //to let it move with the move cub
-        }
-                   
+      
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-       
+
         if (collision.gameObject.CompareTag("MoveCube"))
         {
-            onMoveCube = true;
+            OnAir = false;
         }
-        
+
+        if (collision.gameObject.CompareTag("GamePlane"))
+        {
+            OnAir = false;
+        }
+
     }
 
     private void PlayerJump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && OnAir == false)
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            onMoveCube = false;
+            OnAir = true;
         }
     }
 
