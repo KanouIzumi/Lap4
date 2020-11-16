@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Poll
   - Enemy
+  - Fire
   layers:
   - Default
   - TransparentFX
