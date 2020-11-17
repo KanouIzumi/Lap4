@@ -11,6 +11,7 @@ public class Player_Controller : MonoBehaviour
     public float damageRate;
     public float health;
     bool IsAlive = true;
+    public float rotation = 0;
     
 
     public Animator playerAnim;
@@ -30,49 +31,55 @@ public class Player_Controller : MonoBehaviour
     {
         if (IsAlive == true)
         {
-            if (Input.GetKey(KeyCode.W)) //go forward
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) //go forward
             {
                 transform.Translate(Vector3.forward * Time.deltaTime * speed);
-                transform.rotation = Quaternion.Euler(0, 0, 0);
+                transform.rotation = Quaternion.Euler(0, 0+rotation, 0);
                 playerAnim.SetBool("IsWalkBool", true);
             }
-            else if (Input.GetKeyUp(KeyCode.W))
+            else if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
             {
                 playerAnim.SetBool("IsWalkBool", false);
             }
 
-            if (Input.GetKey(KeyCode.S)) // go backward
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) // go backward
             {
                 transform.Translate(Vector3.forward * Time.deltaTime * speed);
-                transform.rotation = Quaternion.Euler(0, 180, 0);
+                transform.rotation = Quaternion.Euler(0, 180+rotation, 0);
                 playerAnim.SetBool("IsWalkBool", true);
             }
-            else if (Input.GetKeyUp(KeyCode.S))
+            else if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
             {
                 playerAnim.SetBool("IsWalkBool", false);
             }
 
-            if (Input.GetKey(KeyCode.A)) // go left
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) // go left
             {
-                transform.Translate(Vector3.forward * Time.deltaTime * speed);
-                transform.rotation = Quaternion.Euler(0, -90, 0);
+                //transform.Translate(Vector3.forward * Time.deltaTime * speed);
+                // transform.rotation = Quaternion.Euler(0, -90+rotation, 0);
+                rotation -= rotateSpeed;
+                transform.rotation = Quaternion.Euler(0, rotation, 0);
                 playerAnim.SetBool("IsWalkBool", true);
             }
-            else if (Input.GetKeyUp(KeyCode.A))
+            else if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow))
             {
                 playerAnim.SetBool("IsWalkBool", false);
             }
 
-            if (Input.GetKey(KeyCode.D)) // go right
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) // go right
             {
-                transform.Translate(Vector3.forward * Time.deltaTime * speed);
-                transform.rotation = Quaternion.Euler(0, 90, 0);
+                //transform.Translate(Vector3.forward * Time.deltaTime * speed);
+                //transform.rotation = Quaternion.Euler(0, 90+rotation, 0);
+                rotation += rotateSpeed;
+                transform.rotation = Quaternion.Euler(0, rotation, 0);
                 playerAnim.SetBool("IsWalkBool", true);
             }
-            else if (Input.GetKeyUp(KeyCode.D))
+            else if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.RightArrow))
             {
                 playerAnim.SetBool("IsWalkBool", false);
             }
+
+            
 
             if (Input.GetKeyDown(KeyCode.Space)) //Attack
             {

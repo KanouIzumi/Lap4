@@ -669,9 +669,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPointText: {fileID: 403915819}
   speed: 10
-  rotateSpeed: 30
+  rotateSpeed: 10
   damageRate: 10
   health: 10
+  rotation: 0
   playerAnim: {fileID: 0}
   playerRb: {fileID: 0}
 --- !u!54 &1559445836
